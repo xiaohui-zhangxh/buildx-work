@@ -66,3 +66,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "kamal", "~> 1.4", group: :deploy
