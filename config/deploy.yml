@@ -2,17 +2,32 @@
 service: buildxwork
 
 # Name of the container image.
-image: user/my-app
+image: tanmer/buildxwork
+
+# Use a different ssh user than root
+ssh:
+  user: ubuntu
 
 # Deploy to these servers.
 servers:
-  - 192.168.0.1
+  web:
+    hosts:
+    - 106.75.30.101
+    labels:
+      namespace: buildxwork
+      traefik.enable: "true"
+      traefik.http.routers.buildxwork-web.rule: "Host(`buildxwork.devops.tanmer.com`)"
+      traefik.http.routers.buildxwork-web.tls: true
+      traefik.http.routers.buildxwork-web.middlewares: "default@file,buildxwork-web-retry@docker"
+      traefik.http.routers.buildxwork-web.entryPoints: "https"
+    options:
+      network: tanmer
 
 # Credentials for your image host.
 registry:
   # Specify the registry server, if you're not using Docker Hub
-  # server: registry.digitalocean.com / ghcr.io / ...
-  username: my-user
+  server: registry.devops.tanmer.com
+  username: tanmer
 
   # Always use an access token rather than real password when possible.
   password:
@@ -20,18 +35,18 @@ registry:
 
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
-# env:
-#   clear:
-#     DB_HOST: 192.168.0.2
-#   secret:
-#     - RAILS_MASTER_KEY
+env:
+  clear:
+    WEB_CONCURRENCY: 2
+  secret:
+    - RAILS_MASTER_KEY
 
-# Use a different ssh user than root
-# ssh:
-#   user: app
+volumes:
+  - buildxwork-storage:/rails/storage
 
 # Configure builder setup.
-# builder:
+builder:
+  multiarch: false
 #   args:
 #     RUBY_VERSION: 3.2.0
 #   secrets:
@@ -81,7 +96,7 @@ registry:
 # If your app is using the Sprockets gem, ensure it sets `config.assets.manifest`.
 # See https://github.com/basecamp/kamal/issues/626 for details
 #
-# asset_path: /rails/public/assets
+asset_path: /rails/public/assets
 
 # Configure rolling deploys by setting a wait time between batches of restarts.
 # boot:

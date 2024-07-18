@@ -1,0 +1,24 @@
+<div id="<%= dom_id webhook %>" class="rounded-lg bg-gray-100 p-6 space-y-3">
+  <p>
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= webhook.name %>
+  </p>
+  <p>
+    <strong class="block font-medium mb-1">Hook:</strong>
+    <%= webhook.hook_type %>
+  </p>
+  <p>
+    <strong class="block font-medium mb-1">Hook URL:</strong>
+    <%= callme_url(key: webhook.key) %>
+    <br>
+    <textarea class="w-full mt-2" readonly rows="3"><%= callme_url(key: webhook.key, **webhook.example) %></textarea>
+  </p>
+  <p>
+    <strong class="block font-medium mb-1">Fanout:</strong>
+    <%= webhook.fanout_type %>
+  </p>
+  <p>
+    <strong class="block font-medium mb-1">Fanout Config:</strong>
+    <pre><%= webhook.fanout_config.to_json %></pre>
+  </p>
+</div>
