@@ -1,4 +1,4 @@
-class Callme::Webhook::Hooks::QiniuAudit
+class Callme::Webhook::Hooks::QiniuAudit < Callme::Webhook::Hooks::Base
   def self.example
     {
       inputBucket: "example-bucket",
@@ -15,15 +15,11 @@ class Callme::Webhook::Hooks::QiniuAudit
     }
   end
 
-  def initialize(params)
-    @params = params
-  end
-
   def hook
     result = parse_result(@params.deep_stringify_keys)
-    return unless result[:bucket].present? && result[:key].present? && report?(result[:suggestion])
+    return response_message(false, 'invalid request') unless result[:bucket].present? && result[:key].present? && report?(result[:suggestion])
 
-    "#{result[:suggestion]} [#{result[:bucket]}] => /#{result[:key]} ，原因: #{result[:desc].join('，')}"
+    response_message true, "#{result[:suggestion]} [#{result[:bucket]}] => /#{result[:key]} ，原因: #{result[:desc].join('，')}"
   end
 
   private

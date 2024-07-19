@@ -3,8 +3,9 @@ module Callme::Webhook::Fanout
 
   def fanout(params)
     fanout = Callme::Webhook::Fanouts.const_get(fanout_type.to_s.camelize).new(self)
-    message = Callme::Webhook::Hooks.const_get(hook_type.to_s.camelize).new(params).hook
+    info = Callme::Webhook::Hooks.const_get(hook_type.to_s.camelize).new(params).hook
+    return info unless info[:success] && info[:message].present?
 
-    return fanout.run(message)
+    fanout.run(info[:message])
   end
 end

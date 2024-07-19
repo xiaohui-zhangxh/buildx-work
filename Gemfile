@@ -72,3 +72,7 @@ end
 gem "kamal", "~> 1.7.3", group: :deploy
 
 gem "faraday", "~> 2.10"
+
+gem "sentry-rails", "~> 5.18"
+
+gem "sentry-ruby", "~> 5.18"

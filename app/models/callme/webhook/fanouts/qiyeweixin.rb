@@ -5,6 +5,7 @@ class Callme::Webhook::Fanouts::Qiyeweixin
 
   def run(content)
     return { success: false, error_message: "empty message" } if content.blank?
+    return { success: false, error_message: "key is empty" } if key.blank?
 
     message = {
       msgtype: "text",
@@ -13,8 +14,9 @@ class Callme::Webhook::Fanouts::Qiyeweixin
       }
     }
     resp = notice(message)
-    error_message = JSON.parse(resp.body)['errmsg']
-    { success: resp.success?, error_message: }
+    body = JSON.parse(resp.body) rescue {}
+    body = {} unless body.is_a?(Hash)
+    { success: resp.success? && body['errcode'] == 0, message: body['errmsg'] }
   end
 
   private

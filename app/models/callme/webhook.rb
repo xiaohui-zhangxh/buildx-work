@@ -1,7 +1,7 @@
 class Callme::Webhook < ApplicationRecord
   include Fanout
 
-  enum hook_type: { raw: 0, qiniu_audit: 1 }, _scopes: false, _suffix: :hook
+  enum hook_type: { raw: 0, qiniu_audit: 1, gitlab: 2 }, _scopes: false, _suffix: :hook
   enum fanout_type: { qiyeweixin: 0 }, _scopes: false, _suffix: :fanout
 
   before_validation :generate_key, on: :create

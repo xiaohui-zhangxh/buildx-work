@@ -40,6 +40,7 @@ env:
     WEB_CONCURRENCY: 2
   secret:
     - RAILS_MASTER_KEY
+    - SENTRY_DSN
 
 volumes:
   - buildxwork-storage:/rails/storage

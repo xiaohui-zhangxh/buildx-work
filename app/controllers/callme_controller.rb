@@ -5,12 +5,12 @@ class CallmeController < ApplicationController
     key = params[:key]
     webhook = Callme::Webhook.find_by(key: key)
     if webhook
-      result = webhook.fanout(params.as_json)
-      json = Rails.env.development? ? result : {}
+      result = webhook.fanout(request.params.except('controller', 'action', 'key'))
       if result[:success]
-        render json:, status: :ok
+        render json: {}, status: :ok
       else
-        render json:, status: :internal_server_error
+        Sentry.capture_message("Fanout failed", extra: { webhook_id: webhook.id, result: })
+        render json: result, status: :unprocessable_entity
       end
     else
       render json: { error: "Webhook not found" }, status: :not_found
