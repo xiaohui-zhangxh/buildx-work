@@ -17,7 +17,8 @@ class Callme::Webhook::Hooks::QiniuAudit < Callme::Webhook::Hooks::Base
 
   def hook
     result = parse_result(@params.deep_stringify_keys)
-    return response_message(false, 'invalid request') unless result[:bucket].present? && result[:key].present? && report?(result[:suggestion])
+    return response_message(false, 'invalid request') unless result[:bucket].present? && result[:key].present?
+    return response_message(true) unless report?(result[:suggestion])
 
     response_message true, "#{result[:suggestion]} [#{result[:bucket]}] => /#{result[:key]} ，原因: #{result[:desc].join('，')}"
   end

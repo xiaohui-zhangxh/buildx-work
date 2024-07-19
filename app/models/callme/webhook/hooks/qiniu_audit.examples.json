@@ -1,0 +1,103 @@
+[
+  {
+    "id": "z2.01z221d2tbcsf2yctq00mn45tm000bpg",
+    "pipeline": "1369081210.baklib-audits",
+    "code": 0,
+    "desc": "The fop was completed successfully",
+    "reqid": "A_kAAAAUDQp6iuMX",
+    "inputBucket": "baklib",
+    "inputKey": "t/85ce448e-bb65-4fd8-bacd-82db385941dc/u/5a8fc4cb-9b47-4f46-bc4c-df9f76cc293e/1721371739230/image.png",
+    "items": [
+      {
+        "cmd": "image-censor/v2/pulp/terror/politician/app/c3RyZWFtX2Jha2xpYl9faW1hZ2U=",
+        "code": 0,
+        "desc": "The fop was completed successfully",
+        "result": {
+          "disable": false,
+          "result": {
+            "appid": "_kodo_c3RyZWFtX2Jha2xpYl9faW1hZ2U=",
+            "code": 200,
+            "disable": false,
+            "entry_id": "669a0c5d000187046a2c0620d36e36b8",
+            "message": "OK",
+            "scenes": {
+              "politician": {
+                "result": {
+                  "label": "normal"
+                },
+                "suggestion": "pass"
+              },
+              "pulp": {
+                "result": {
+                  "label": "normal",
+                  "score": 0.93510246
+                },
+                "suggestion": "pass"
+              },
+              "terror": {
+                "result": {
+                  "label": "normal",
+                  "score": 0.99
+                },
+                "suggestion": "pass"
+              }
+            },
+            "suggestion": "pass"
+          }
+        },
+        "returnOld": 0
+      }
+    ],
+    "key": "bc51792848f905ac820c26f05402c35e",
+    "callme": {
+      "id": "z2.01z221d2tbcsf2yctq00mn45tm000bpg",
+      "pipeline": "1369081210.baklib-audits",
+      "code": 0,
+      "desc": "The fop was completed successfully",
+      "reqid": "A_kAAAAUDQp6iuMX",
+      "inputBucket": "baklib",
+      "inputKey": "t/85ce448e-bb65-4fd8-bacd-82db385941dc/u/5a8fc4cb-9b47-4f46-bc4c-df9f76cc293e/1721371739230/image.png",
+      "items": [
+        {
+          "cmd": "image-censor/v2/pulp/terror/politician/app/c3RyZWFtX2Jha2xpYl9faW1hZ2U=",
+          "code": 0,
+          "desc": "The fop was completed successfully",
+          "result": {
+            "disable": false,
+            "result": {
+              "appid": "_kodo_c3RyZWFtX2Jha2xpYl9faW1hZ2U=",
+              "code": 200,
+              "disable": false,
+              "entry_id": "669a0c5d000187046a2c0620d36e36b8",
+              "message": "OK",
+              "scenes": {
+                "politician": {
+                  "result": {
+                    "label": "normal"
+                  },
+                  "suggestion": "pass"
+                },
+                "pulp": {
+                  "result": {
+                    "label": "normal",
+                    "score": 0.93510246
+                  },
+                  "suggestion": "pass"
+                },
+                "terror": {
+                  "result": {
+                    "label": "normal",
+                    "score": 0.99
+                  },
+                  "suggestion": "pass"
+                }
+              },
+              "suggestion": "pass"
+            }
+          },
+          "returnOld": 0
+        }
+      ]
+    }
+  }
+]

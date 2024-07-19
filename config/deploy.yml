@@ -48,7 +48,9 @@ volumes:
 # Configure builder setup.
 builder:
   multiarch: false
-#   args:
+  args:
+    GIT_COMMIT: <%= ENV['GIT_COMMIT'] %>
+    GIT_TAG: <%= ENV['GIT_TAG'] %>
 #     RUBY_VERSION: 3.2.0
 #   secrets:
 #     - GITHUB_TOKEN

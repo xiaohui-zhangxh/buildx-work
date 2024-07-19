@@ -36,13 +36,22 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
+# Record the git revision and tags in the image
+
+ARG GIT_COMMIT
+ARG GIT_TAG
+ENV GIT_COMMIT=$GIT_COMMIT \
+    GIT_TAG=$GIT_TAG
+
+RUN [ -z "$GIT_COMMIT" ] || echo "$GIT_COMMIT" > GIT_COMMIT
+RUN [ -z "$GIT_TAG" ] || echo "$GIT_TAG" > GIT_TAG
 
 # Final stage for app image
 FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
+    apt-get install --no-install-recommends -y curl vim libsqlite3-0 libvips && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
