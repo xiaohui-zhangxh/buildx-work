@@ -1,6 +1,7 @@
 class Callme::Webhook::Hooks::Base
-  def initialize(params)
+  def initialize(params, headers)
     @params = params
+    @headers = headers
   end
 
   def hook

@@ -6,13 +6,16 @@ image: tanmer/buildxwork
 
 # Use a different ssh user than root
 ssh:
-  user: ubuntu
+  user: <%= ENV.fetch('KAMAL_SSH_USER', 'ubuntu') %>
+<% if ENV['KAMAL_SSH_PROXY'].to_s.strip.length > 0 %>
+  proxy: <%= ENV['KAMAL_SSH_PROXY'] %>
+<% end %>
 
 # Deploy to these servers.
 servers:
   web:
     hosts:
-    - 106.75.30.101
+    - <%= ENV.fetch('KAMAL_SERVER_IP') %>
     labels:
       namespace: buildxwork
       traefik.enable: "true"
