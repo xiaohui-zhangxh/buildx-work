@@ -1,8 +1,8 @@
 class Callme::Webhook < ApplicationRecord
   include Fanout
 
-  enum hook_type: { raw: 0, qiniu_audit: 1, gitlab: 2 }, _scopes: false, _suffix: :hook
-  enum fanout_type: { qiyeweixin: 0 }, _scopes: false, _suffix: :fanout
+  enum :hook_type, { raw: 0, qiniu_audit: 1, gitlab: 2 }, scopes: false, suffix: :hook
+  enum :fanout_type, { qiyeweixin: 0 }, scopes: false, suffix: :fanout
 
   before_validation :generate_key, on: :create
   before_validation :fanout_config_to_json
@@ -13,13 +13,13 @@ class Callme::Webhook < ApplicationRecord
 
   private
 
-    def generate_key
-      self.key = SecureRandom.hex(16)
-    end
+  def generate_key
+    self.key = SecureRandom.hex(16)
+  end
 
-    def fanout_config_to_json
-      self.fanout_config = JSON.parse(fanout_config) if fanout_config.is_a?(String)
-    rescue JSON::ParserError
-      self.fanout_config = {}
-    end
+  def fanout_config_to_json
+    self.fanout_config = JSON.parse(fanout_config) if fanout_config.is_a?(String)
+  rescue JSON::ParserError
+    self.fanout_config = {}
+  end
 end

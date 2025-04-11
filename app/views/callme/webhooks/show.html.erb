@@ -4,10 +4,10 @@
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
     <%= render @callme_webhook %>
-    <%= link_to "Edit this webhook", edit_callme_webhook_path(@callme_webhook), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to webhooks", callme_webhooks_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this webhook", @callme_webhook, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    <div class="flex justify-end gap-2 my-4">
+      <%= link_to "Edit this webhook", edit_callme_webhook_path(@callme_webhook), class: "btn" %>
+      <%= link_to "Back to webhooks", callme_webhooks_path, class: "btn" %>
+      <%= button_to "Destroy this webhook", @callme_webhook, method: :delete, class: "btn btn-error" %>
     </div>
   </div>
 </div>

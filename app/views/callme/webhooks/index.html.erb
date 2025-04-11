@@ -5,13 +5,13 @@
   <% content_for :title, "Webhooks" %>
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Webhooks</h1>
-    <%= link_to "New webhook", new_callme_webhook_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to "New webhook", new_callme_webhook_path, class: "btn btn-primary" %>
   </div>
   <div id="callme_webhooks" class="min-w-full space-y-6 py-6">
     <% @callme_webhooks.each do |callme_webhook| %>
       <%= render callme_webhook %>
       <p>
-        <%= link_to "Show this webhook", callme_webhook, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        <%= link_to "Show this webhook", callme_webhook, class: "btn btn-primary" %>
       </p>
     <% end %>
   </div>
